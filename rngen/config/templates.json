@@ -1,0 +1,211 @@
+{
+    "KEY_SFT": {
+        "instruction": "Identify local key regions within BAR {} only. Specify key regions using bar and position markers.",
+        "input": "MusicBERT's output embeddings: <music></music>",
+        "system": "You are a music theory expert analyzing a piece based on MusicBERT's output. Only identify keys within the specified bar. Other bars are context and must not be labeled. Format output exactly as: bar X position Y, bar Z position W: Key",
+        "spelling": "Note spellings in the input music: {}"
+    },
+    "RNA_SFT": {
+        "instruction": "Apply Roman Numeral analysis for BAR {}.",
+        "input": "MusicBERT's output embeddings: <music></music>",
+        "system": "You are a music theory expert analyzing a piece based on MusicBERT's output. Only apply Roman Numeral analysis within the specified bar. Other bars are context and must not be labeled. Return a valid JSON object, where each key is the local key, each value is a list of strings in the format:'bar X quarterbeats Y: Roman Numeral'",
+        "spelling": "Note spellings in the input music: {}"
+    },
+    "RNA_CURRICULUM_STAGE2": {
+        "description": "Fine-grained Stage 2 curriculum templates. Task name is sample metadata/prompt context, not part of model output. All outputs must be bare valid JSON lists.",
+        "input": "MusicBERT's output embeddings: <music></music>",
+        "system": "You are a music theory expert analyzing symbolic music from MusicBERT embeddings. Only analyze the requested target bars. Other bars are context. Return only valid JSON with no extra text.",
+        "spelling": "Note spellings in the input music: {}",
+        "time_format": "Use time points in the form: bar X qb Y. Here qb means quarterbeats.",
+        "shared_rules": [
+            "Do not include a task field in the model output.",
+            "Use a bare JSON list as the output.",
+            "For gold-span tasks, refer to spans by id and do not repeat start/end in the output.",
+            "When a task provides reference inputs, they are inserted into the task-specific reference-input section and must follow that task's input_schema.",
+            "Use none for absent values.",
+            "Chord tones are spelled pitch classes without octave.",
+            "Primary and secondary functions include alteration plus numeral, for example bVI, #IV, or V.",
+            "Function numerals are case-insensitive; chord quality is predicted separately."
+        ],
+        "tasks": {
+            "harmony_span_prediction": {
+                "instruction": "Predict the harmony spans in BAR {}. Return a JSON list. Each span must use this schema: {\"id\": <integer>, \"start\": \"bar X qb Y\", \"end\": \"bar Z qb W\"}.",
+                "input_schema": [],
+                "output_schema": [
+                    {
+                        "id": "integer",
+                        "start": "bar X qb Y",
+                        "end": "bar Z qb W"
+                    }
+                ],
+                "example_output": [
+                    {
+                        "id": 0,
+                        "start": "bar 3 qb 0.0",
+                        "end": "bar 3 qb 2.0"
+                    }
+                ]
+            },
+            "chord_tone_inventory_prediction": {
+                "instruction": "For BAR {}, use the provided reference harmony spans to predict the chord-tone spelled pitch classes for each span. Return a JSON list with one item per span id. Do not include octave.\n\nReference harmony spans:\n{}",
+                "reference_input_name": "reference harmony spans",
+                "input_schema": [
+                    {
+                        "id": "integer",
+                        "start": "bar X qb Y",
+                        "end": "bar Z qb W"
+                    }
+                ],
+                "output_schema": [
+                    {
+                        "id": "integer",
+                        "chord_tones": [
+                            "spelled_pitch_class"
+                        ]
+                    }
+                ],
+                "example_output": [
+                    {
+                        "id": 0,
+                        "chord_tones": [
+                            "C",
+                            "E",
+                            "G"
+                        ]
+                    }
+                ]
+            },
+            "tone_factor_pair_prediction": {
+                "instruction": "For BAR {}, use the provided reference harmony spans to predict the chord-tone factor for each chord-tone spelled pitch class. Return a JSON list with one item per span id. Use factor labels R, T, F, and S.\n\nReference harmony spans:\n{}",
+                "reference_input_name": "reference harmony spans",
+                "input_schema": [
+                    {
+                        "id": "integer",
+                        "start": "bar X qb Y",
+                        "end": "bar Z qb W"
+                    }
+                ],
+                "output_schema": [
+                    {
+                        "id": "integer",
+                        "tone_factors": {
+                            "spelled_pitch_class": "factor"
+                        }
+                    }
+                ],
+                "example_output": [
+                    {
+                        "id": 0,
+                        "tone_factors": {
+                            "C": "R",
+                            "E": "T",
+                            "G": "F"
+                        }
+                    }
+                ]
+            },
+            "quality_prediction": {
+                "instruction": "For BAR {}, use the provided reference harmony spans to predict the chord quality for each span. Return a JSON list with one item per span id.\n\nReference harmony spans:\n{}",
+                "reference_input_name": "reference harmony spans",
+                "input_schema": [
+                    {
+                        "id": "integer",
+                        "start": "bar X qb Y",
+                        "end": "bar Z qb W"
+                    }
+                ],
+                "allowed_quality_labels": [
+                    "M",
+                    "m",
+                    "Mm7",
+                    "o",
+                    "o7",
+                    "m7",
+                    "aug6",
+                    "ø7",
+                    "M7",
+                    "+"
+                ],
+                "output_schema": [
+                    {
+                        "id": "integer",
+                        "quality": "quality_label"
+                    }
+                ],
+                "example_output": [
+                    {
+                        "id": 0,
+                        "quality": "M"
+                    }
+                ]
+            },
+            "inversion_figure_prediction": {
+                "instruction": "For BAR {}, use the provided reference harmony spans to predict the Roman-numeral inversion figure for each span. Return a JSON list with one item per span id. Use none when the surface Roman numeral has no inversion figure.\n\nReference harmony spans:\n{}",
+                "reference_input_name": "reference harmony spans",
+                "input_schema": [
+                    {
+                        "id": "integer",
+                        "start": "bar X qb Y",
+                        "end": "bar Z qb W"
+                    }
+                ],
+                "allowed_inversion_figure_labels": [
+                    "none",
+                    "6",
+                    "64",
+                    "7",
+                    "65",
+                    "43",
+                    "2"
+                ],
+                "output_schema": [
+                    {
+                        "id": "integer",
+                        "inversion_figure": "inversion_figure_label"
+                    }
+                ],
+                "example_output": [
+                    {
+                        "id": 0,
+                        "inversion_figure": "none"
+                    },
+                    {
+                        "id": 1,
+                        "inversion_figure": "65"
+                    }
+                ]
+            },
+            "ps_function_prediction": {
+                "instruction": "For BAR {}, use the provided reference harmony spans with local keys to predict the primary and secondary harmonic functions for each span. Each reference item includes the local key that applies to that span. Functions must include alteration when present, such as bVI or #IV. Use case-insensitive function labels; chord quality is predicted separately. Use none when there is no secondary function. Return a JSON list with one item per span id.\n\nReference harmony spans with local keys:\n{}",
+                "reference_input_name": "reference harmony spans with local keys",
+                "input_schema": [
+                    {
+                        "id": "integer",
+                        "start": "bar X qb Y",
+                        "end": "bar Z qb W",
+                        "local_key": "local_key_label"
+                    }
+                ],
+                "output_schema": [
+                    {
+                        "id": "integer",
+                        "primary": "primary_function_label",
+                        "secondary": "secondary_function_label_or_none"
+                    }
+                ],
+                "example_output": [
+                    {
+                        "id": 0,
+                        "primary": "I",
+                        "secondary": "none"
+                    },
+                    {
+                        "id": 1,
+                        "primary": "V",
+                        "secondary": "#IV"
+                    }
+                ]
+            }
+        }
+    }
+}

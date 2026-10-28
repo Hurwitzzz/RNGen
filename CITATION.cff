@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use RNGen, its checkpoints, or its data in a research publication, please cite the paper below."
+type: software
+title: "RNGen"
+authors:
+  - family-names: Gao
+    given-names: Hewei
+repository-code: "https://github.com/Hurwitzzz/RNGen"
+license: MIT
+preferred-citation:
+  type: conference-paper
+  title: "RNGen: A Large Language Model Approach to Roman Numeral Analysis Toward Explainable Harmonic Analysis"
+  authors:
+    - family-names: Gao
+      given-names: Hewei
+    - family-names: Beyer
+      given-names: Tim
+    - family-names: Wang
+      given-names: Xiaoxuan
+    - family-names: Rohrmeier
+      given-names: Martin
+  collection-title: "Proceedings of the 27th International Society for Music Information Retrieval Conference"
+  year: 2026
+  url: "https://ismir2026program.ismir.net/poster_405.html"

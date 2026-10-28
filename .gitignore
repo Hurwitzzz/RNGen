@@ -1,0 +1,72 @@
+# Python
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment (including submodules)
+/.venv/
+**/venv/
+**/venvvars/
+**/.env
+.python-version
+
+# IDE (including submodules)
+**/.vscode/
+**/.idea/
+**/*.swp
+**/pyrightconfig.json
+
+# Project specific (including submodules)
+**/wandb/
+outputs/*
+!outputs/.gitignore
+ckpts/*
+!ckpts/.gitignore
+/datasets/releases/
+**/checkpoints/
+/slurm_outputs/*
+!/slurm_outputs/.gitkeep
+**/training_commands.txt
+**/predict_commands*.txt
+**/experiments/linear_probe/logs/
+**/experiments/linear_probe/snapshots/
+**/debug.yaml
+
+# Local paper source/template drops
+/latex/
+/paper/
+/*_ismir_2025/
+
+# Local generated figure artifacts
+/rngen/thesis_plot/figs/
+
+# Test outputs (including submodules)
+**/tests/temp_out/
+**/test_output/
+**/build/
+
+# Temporary files
+**/.DS_Store
+**/.coverage
+**/coverage.xml
+**/*.log
+
+# Keep gitignore files
+!.gitignore

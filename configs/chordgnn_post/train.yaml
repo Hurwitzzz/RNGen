@@ -1,0 +1,26 @@
+# ChordGNN+Post training parameters.
+# Replace paths, then run python -m rngen.baselines.train chordgnn_post.
+# Repeat with seed=42,43,44 and distinct output directories for the paper runs.
+train_manifest: /path/to/chordgnn_cache/train_npz_paths.txt
+validation_manifest: /path/to/chordgnn_cache/validation_npz_paths.txt
+cache_report: /path/to/chordgnn_cache/materialization_report.json
+# Optional extra read-only CSV roots; the cache report supplies the source roots.
+source_root: null
+ontology: /path/to/chordgnn_cache/ontology.json
+base_checkpoint: /path/to/chordgnn/seed_42/training/checkpoints/best.pt
+base_run_config: /path/to/chordgnn/seed_42/training/run_config.json
+output_dir: /path/to/outputs/chordgnn_post/seed_42
+protocol: formal
+epochs: 31
+batch_size: 100
+base_seed: 42
+seed: 42
+hidden_size: 256
+n_layers: 1
+dropout: 0.4
+learning_rate: 0.001
+weight_decay: 0.0005
+num_workers: 0
+device: cuda
+early_stopping_patience: 10
+early_stopping_min_delta: 0.0

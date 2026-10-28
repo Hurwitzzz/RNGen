@@ -1,0 +1,14 @@
+# Public curriculum_stage2 training recipe; replace all /path/to placeholders.
+# Effective training batch 4.
+_base_: sft_common.yaml
+rnbert_checkpoint_path: null
+wandb_project: rna_curriculum_stage2
+task: rna_curriculum_stage2_sft
+jsonl_dir: /path/to/rngen/mixed
+eval_steps: 0.1
+save_steps: 0.1
+num_train_epochs: 1
+metric_for_best_model: eval_stage2_selection_loss
+max_new_tokens: 2048
+finetuned_rngen_checkpoint: /path/to/selected_previous_stage_checkpoint
+output_dir: /path/to/outputs/curriculum_stage2

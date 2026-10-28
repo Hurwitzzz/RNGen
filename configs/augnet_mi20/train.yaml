@@ -1,0 +1,17 @@
+# AugmentedNet and Micchi2020 training parameters.
+# Replace paths, then run python -m rngen.baselines.train augnet_mi20.
+# Repeat with seed=42,43,44 and distinct output directories for the paper runs.
+architecture: AugmentedNet
+train_manifest: /path/to/augnet_cache/train_npz_paths.txt
+validation_manifest: /path/to/augnet_cache/validation_npz_paths.txt
+cache_report: /path/to/augnet_cache/materialization_report.json
+# Optional extra read-only CSV roots; the cache report supplies the source roots.
+source_root: null
+ontology_audit: /path/to/augnet_ontology.json
+output_dir: /path/to/outputs/augnet/seed_42
+epochs: 100
+batch_size: 16
+seed: 42
+lr_boundaries: '40'
+lr_values: 0.001,0.001
+quiet: true

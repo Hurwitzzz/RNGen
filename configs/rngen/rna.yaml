@@ -1,0 +1,14 @@
+# Public rna training recipe; replace all /path/to placeholders.
+# Previous stage: Key for the 1.5B/3B recipe, Stage 2 for the 7B/14B recipe.
+_base_: sft_common.yaml
+rnbert_checkpoint_path: null
+wandb_project: rna_prediction
+task: rna_sft
+jsonl_dir: /path/to/rngen/rna
+eval_steps: 1800
+save_steps: 1800
+num_train_epochs: 2
+metric_for_best_model: eval_loss
+max_new_tokens: 2048
+finetuned_rngen_checkpoint: /path/to/selected_previous_stage_checkpoint
+output_dir: /path/to/outputs/rna

@@ -1,0 +1,5 @@
+# Core RNGen training/evaluation installation. Run from the repository root.
+# Dependency versions are maintained in pyproject.toml.
+# Initialize musicbert_hf first, or use: python3.11 install.py
+-e ./musicbert_hf
+-e .

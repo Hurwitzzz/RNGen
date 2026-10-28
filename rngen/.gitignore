@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+analysis/__pycache__/
+notebooks/outputs/
+notebooks/wandb/
+tests/__pycache__/
+tests/example_files/
+thesis_plot/__pycache__/
+training/__pycache__/
+utils/__pycache__/

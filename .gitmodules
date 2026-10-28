@@ -1,0 +1,17 @@
+[submodule "musicbert_fork"]
+	path = musicbert_fork
+	url = https://github.com/Hurwitzzz/musicbert_fork.git
+	branch = clean
+[submodule "music_df"]
+	path = music_df
+	url = https://github.com/Hurwitzzz/music_df.git
+[submodule "write_seqs"]
+	path = write_seqs
+	url = https://github.com/Hurwitzzz/write_seqs.git
+[submodule "reprs"]
+	path = reprs
+	url = https://github.com/Hurwitzzz/reprs.git
+[submodule "musicbert_hf"]
+	path = musicbert_hf
+	url = https://github.com/Hurwitzzz/musicbert_hf.git
+	branch = main

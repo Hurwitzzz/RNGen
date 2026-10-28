@@ -1,0 +1,26 @@
+features:
+  - key
+  - spelling
+  - mn
+  - gt_rnbert
+  - chord_tones
+  - chord_tone_factors
+concatenated_features: []
+corpora_to_exclude:
+  - RenDissData
+
+repr_type: oct
+
+# augmentation
+# Key transposition is already applied upstream. Do not augment it again here.
+aug_by_key: false
+aug_by_key_n_keys: 12
+deterministic_start_i: true
+aug_rhythms: false
+
+# segment by phrase
+segment_by_phrase: true
+max_num_notes: 500
+num_context_bars: 1
+combine_adjacent_short_phrase: false
+split_long_phrase: true

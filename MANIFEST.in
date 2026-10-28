@@ -1,0 +1,18 @@
+include README.md
+include LICENSE
+include THIRD_PARTY_NOTICES.md
+include CITATION.cff
+include doc/reference/rna_component_metrics.md
+include rngen_requirements.txt
+include install.py
+recursive-include rngen/config *.json *.yaml
+recursive-include rngen/data *.json
+prune rngen/tests
+prune datasets
+prune ckpts
+prune outputs
+prune musicbert_fork
+prune musicbert_hf
+prune music_df
+prune reprs
+prune write_seqs

@@ -1,0 +1,13 @@
+# Public key training recipe; replace all /path/to placeholders.
+_base_: sft_common.yaml
+rnbert_checkpoint_path: /path/to/rnbert/unconditioned_checkpoint_best.pt
+finetuned_rngen_checkpoint: null
+wandb_project: key_prediction
+task: key_sft
+jsonl_dir: /path/to/rngen/key
+eval_steps: 1800
+save_steps: 1800
+num_train_epochs: 2
+metric_for_best_model: eval_loss
+max_new_tokens: 256
+output_dir: /path/to/outputs/key

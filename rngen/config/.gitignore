@@ -1,0 +1,7 @@
+*
+!*.json
+!.gitignore
+!*.yaml
+!*.yml
+!*.sh
+!README.md
