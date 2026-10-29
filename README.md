@@ -63,16 +63,10 @@ Weights and datasets are hosted on Hugging Face separately from the Git reposito
 | [Hurwitz/RNGen-checkpoints](https://huggingface.co/Hurwitz/RNGen-checkpoints) | Base encoder weights and all six RNGen checkpoints | `e8c2ba060ea6c0f1f5ebe30753ff94941167d271` |
 | [Hurwitz/RNGen-data](https://huggingface.co/datasets/Hurwitz/RNGen-data) | Key, Mixed, and RNA annotations; processed scores and metadata; preprocessing settings | `6cdfc9d59b50b2c491874057d77aea3f8522a089` |
 
-Both repositories are currently private. Downloading requires a Hugging Face
-account with access. After activating the RNGen environment, authenticate in
-the terminal:
-
-```bash
-huggingface-cli login
-```
-
-Run these commands from the repository root. The fixed revisions select the
-files associated with this release:
+Both repositories are public; downloading does not require a Hugging Face
+account or login. After activating the RNGen environment, run these commands
+from the repository root. The fixed revisions select the files associated
+with this release:
 
 ```bash
 huggingface-cli download Hurwitz/RNGen-checkpoints \
